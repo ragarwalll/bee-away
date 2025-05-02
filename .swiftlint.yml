@@ -1,0 +1,31 @@
+# .swiftlint.yml
+
+# Treat warnings as errors
+strict: true
+
+# Rules to disable entirely
+disabled_rules:
+  - line_length
+  - identifier_name
+  - type_body_length
+  - function_body_length
+  - static_over_final_class
+  - file_length
+
+# You can also configure individual rules instead of disabling them:
+opt_in_rules:
+  - empty_count    # example opt-in rule
+
+# Per-file or per-path rule exclusions:
+excluded:
+  - Carthage
+  - Pods
+  - fastlane
+
+# Customize rule parameters rather than disabling:
+line_length:
+  warning: 120    # warn at 120 chars
+  error: 200      # error at 200 chars
+
+identifier_name:
+  min_length: 3   # but still keep the rule active at tighter thresholds
