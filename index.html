@@ -45,28 +45,6 @@
       }
     </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const a = document.querySelector("a.latest-release");
-        if (!a) return;
-
-        fetch("https://api.github.com/repos/ragarwalll/bee-away/tags")
-          .then((res) => res.json())
-          .then((tags) => {
-            if (Array.isArray(tags) && tags.length && tags[0].name) {
-              const tag = tags[0].name;
-              // replace “latest” in both href and text
-              a.href = a.href.replace("latest", tag);
-              a.textContent = a.textContent.replace("latest", tag);
-            }
-          })
-          .catch((err) => {
-            console.error("Could not fetch tags:", err);
-            // fallback: leave “latest” in place
-          });
-      });
-    </script>
-
     <meta
       name="keywords"
       content="macOS status bar utility, keep awake, idle prevention, mouse wiggle, app ping, battery aware, power management, accessibility automation, notification keep-alive, custom duration, homebrew cask, BeeAway, menu-bar app, productivity tool, SwiftUI, Swift macOS app"
