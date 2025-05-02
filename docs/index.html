@@ -45,7 +45,10 @@
       }
     </script>
 
-    <meta name="keywords" content="macOS status bar utility, keep awake, idle prevention, mouse wiggle, app ping, battery aware, power management, accessibility automation, notification keep-alive, custom duration, homebrew cask, BeeAway, menu-bar app, productivity tool, SwiftUI, Swift macOS app">
+    <meta
+      name="keywords"
+      content="macOS status bar utility, keep awake, idle prevention, mouse wiggle, app ping, battery aware, power management, accessibility automation, notification keep-alive, custom duration, homebrew cask, BeeAway, menu-bar app, productivity tool, SwiftUI, Swift macOS app"
+    />
 
     <meta name="author" content="Rahul Agarwal" />
     <meta name="robots" content="index, follow" />
@@ -114,7 +117,9 @@
     </object>
 
     <h1 class="no-margin-bottom no-margin-top">
-      <span class="lighter-weight">Bee<span class="normal-weight">Away</span></span>
+      <span class="lighter-weight"
+        >Bee<span class="normal-weight">Away</span></span
+      >
     </h1>
 
     <i class="no-margin-top">Be Online while Being Away.</i>
@@ -127,11 +132,23 @@
       <h2 class="inline-block no-margin-bottom">How to Download?</h2>
       <a href="#download" class="heading-link">#</a>
     </div>
+    <p></p>
     <div class="about-fake">
-      <p>
-        Blah, blah, blah... Please find the latest version of the app on
-        <a href="https://github.com/ragarwalll/bee-away/releases/latest" target="_blank" class="new-anchor">GitHub releases</a>
-      </p>
+      <div class="auto-grid auto-grid-2">
+        <div>
+          ① Using Homebrew (advised):
+          <pre class="code-snippet">
+brew tap ragarwalll/homebrew-tap
+brew install --cask bee-away
+          </pre>
+        </div>
+        <div>
+          ② GitHub Release
+          <pre class="code-snippet">
+<a href="https://github.com/ragarwalll/bee-away/releases/latest" target="_blank" class="new-anchor latest-release">BeeAway-latest.dmg</a>
+          </pre>
+        </div>
+      </div>
     </div>
     <!-- end of download section -->
 
@@ -144,8 +161,7 @@
       <a href="#features" class="heading-link">#</a>
     </div>
 
-    <p class="features-list">
-    </p>
+    <p class="features-list"></p>
 
     <div class="auto-grid auto-grid-2">
       <!-- Simluate mouse movement before MaoOS Timeout -->
@@ -158,39 +174,38 @@
           </h5>
         </div>
 
-       <img 
-        src="./images/preview.jpg" 
-        alt="BeeAway Preview"
-        class="preview-image"
-        width="100%"
-        height="auto"
-        loading="lazy"
-        decoding="async"
+        <img
+          src="./images/preview.jpg"
+          alt="BeeAway Preview"
+          class="preview-image"
+          width="100%"
+          height="auto"
+          loading="lazy"
+          decoding="async"
         />
       </div>
-      
+
       <!-- end of preview -->
 
       <!-- Simulate App Focus -->
       <div>
         <div class="heading-link-activator">
-          <h4 class="inline-block no-margin-bottom">
-            App Focus Simulation
-          </h4>
+          <h4 class="inline-block no-margin-bottom">App Focus Simulation</h4>
           <a href="#app-focus-simulation" class="heading-link">#</a>
           <h5 class="no-margin-top lighter-weight">
-            For apps selected, it simulates focus by pinging the app icon in the menu bar
+            For apps selected, it simulates focus by pinging the app icon in the
+            menu bar
           </h5>
         </div>
 
-        <img 
-        src="./images/preview-prefs.jpg" 
-        alt="BeeAway Preview"
-        class="preview-image"
-        width="100%"
-        height="auto"
-        loading="lazy"
-        decoding="async"
+        <img
+          src="./images/preview-prefs.jpg"
+          alt="BeeAway Preview"
+          class="preview-image"
+          width="100%"
+          height="auto"
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </div>
@@ -204,22 +219,22 @@
         </h5>
       </div>
 
-      <p class="features-list">
-        <ul>
-          <li>Simulate mouse movement to keep the Mac awake and active.</li>
-          <li>
-            For apps selected, it simulates focus by pinging the app icon in the
-            menu bar.
-          </li>
-          <li>Adapts to battery vs. AC power.</li>
-          <li>Supports custom activation durations.</li>
-          <li>Pauses itself when battery is low.</li>
-          <li>Adapts to the timeout of the system.</li>
-          <li>Lightweight and easy to use.</li>
-          <li>Built with SwiftUI, making it a native macOS application.</li>
-          <li>Open-source and available on GitHub for anyone to contribute or use.</li>
-        </ul>
-      </p>
+      <ul>
+        <li>Simulate mouse movement to keep the Mac awake and active.</li>
+        <li>
+          For apps selected, it simulates focus by pinging the app icon in the
+          menu bar.
+        </li>
+        <li>Adapts to battery vs. AC power.</li>
+        <li>Supports custom activation durations.</li>
+        <li>Pauses itself when battery is low.</li>
+        <li>Adapts to the timeout of the system.</li>
+        <li>Lightweight and easy to use.</li>
+        <li>Built with SwiftUI, making it a native macOS application.</li>
+        <li>
+          Open-source and available on GitHub for anyone to contribute or use.
+        </li>
+      </ul>
     </div>
     <!-- end of features section -->
 

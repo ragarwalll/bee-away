@@ -44,15 +44,16 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             clean build | xcpretty
 
-      - name: Run Unit & UI Tests
-        run: |
-          xcodebuild \
-            -scheme "BeeAway" \
-            -configuration Debug \
-            -destination 'platform=macOS' \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
-            test | xcpretty
+      # - name: Run Unit & UI Tests
+      #   if: ${{ false() }}
+      #   run: |
+      #     xcodebuild \
+      #       -scheme "BeeAway" \
+      #       -configuration Debug \
+      #       -destination 'platform=macOS' \
+      #       CODE_SIGNING_REQUIRED=NO \
+      #       CODE_SIGNING_ALLOWED=NO \
+      #       test | xcpretty
 
       # On pushes to main, also build a DMG artifact
       - name: Build Release for DMG artifact

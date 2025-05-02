@@ -19,20 +19,15 @@ Please find more details [here](https://therahulagarwal.com/bee-away)
 ## Installation
 
 ### Download & Drag-and-Drop
-1. Download the latest signed & notarized `.dmg` from the [Releases](#) page.  
+1. Download the latest signed & notarized `.dmg` from the [Releases](https://github.com/ragarwalll/bee-away/releases/) page.  
 2. Open the `.dmg` and drag **BeeAway** to your **Applications** folder.  
 3. Launch **BeeAway**. Grant Accessibility and Notification permissions when prompted.
 
 ### Homebrew
-If you prefer Homebrew:
+You can tap the custom repo:
 ```bash
-brew install --cask BeeAway
-```
-
-You can also tap a custom repo:
-```bash
-brew tap ragarwalll/tap
-brew install BeeAway
+brew tap ragarwalll/homebrew-tap
+brew install --cask bee-away
 ```
 
 ## Features
