@@ -4,6 +4,18 @@ BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active”
 
 Please find more details [here](https://therahulagarwal.com/bee-away)
 
+## Table of Contents
+
+- [Installation](#installation)
+  - [Download & Drag-and-Drop](#download--drag-and-drop)
+  - [Homebrew](#homebrew)
+- [Features](#features)
+- [Usage](#usage)
+- [Permissions](#permissions)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Installation
 
 ### Download & Drag-and-Drop
@@ -82,10 +94,7 @@ The first-run onboarding window will guide you through granting these automatica
   Ensure Accessibility access is granted; check Console for Core Graphics errors.
 
 - **Notifications Not Delivered**  
-  Verify Notification permission in System Settings and that your Info.plist includes `NSUserNotificationAlertStyle`.
-
-- **Low-Battery Pause**  
-  Adjust `batteryLowThreshold` in `StatusBarManager.swift` if you want a different cutoff.
+  Verify Notification permission in System Settings.
 
 ## Contributing
 
