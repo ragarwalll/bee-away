@@ -123,3 +123,9 @@ body {
 .contact-wrapper {
   text-align: center;
 }
+
+.preview-image {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
+}
