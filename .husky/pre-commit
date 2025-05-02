@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo 'code scans running...'
+
+swiftlint lint --strict
+swiftformat . --lint

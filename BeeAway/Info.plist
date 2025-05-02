@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSUserNotificationAlertStyle</key>
+	<string>alert</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSAccessibilityUsageDescription</key>
+	<string>BeeAway needs Accessibility permission to simulate input and keep you online.</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>BeeAway uses AppleEvents to ping other apps’ menu-bar icons.</string>
+</dict>
+</plist>

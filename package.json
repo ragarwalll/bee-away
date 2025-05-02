@@ -1,0 +1,55 @@
+{
+    "name": "bee-away",
+    "version": "1.0.0",
+    "description": "Rahul Agarwal's Tools for keeping screen time in check",
+    "scripts": {
+        "prepare": "husky",
+        "release": "standard-version --no-verify --commit-all",
+        "release:first": "standard-version --first-release --no-verify --commit-all",
+        "release:minor": "standard-version --release-as minor --no-verify --commit-all",
+        "release:patch": "standard-version --release-as patch --no-verify --commit-all",
+        "release:major": "standard-version --release-as major --no-verify --commit-all",
+        "commit:lint": "commitlint --edit",
+        "lint": "swiftlint lint --strict",
+        "format": "swiftformat . --lint"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ragarwalll/bee-away.git"
+    },
+    "keywords": [
+        "macos",
+        "menu-bar",
+        "status-bar",
+        "keep-alive",
+        "idle-prevention",
+        "accessibility",
+        "notifications",
+        "power-management",
+        "battery-aware",
+        "automation",
+        "productivity",
+        "swift",
+        "swiftui",
+        "app"
+    ],
+    "author": "ragarwalll <agarwal.rahul324@gmail.com>",
+    "license": "Apache-2.0",
+    "engineStrict": true,
+    "engines": {
+        "npm": ">=10.0.0",
+        "node": ">=20.0.0"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^19.5.0",
+        "@commitlint/config-conventional": "^19.5.0",
+        "husky": "^9.1.6",
+        "npm-run-all": "^4.1.5",
+        "replace": "^1.2.2",
+        "standard-version": "^9.5.0"
+    },
+    "dependencies": {
+        "create-dmg": "^7.0.0",
+        "glob": "^11.0.0"
+    }
+}
