@@ -1,6 +1,6 @@
 {
     "name": "bee-away",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "Rahul Agarwal's Tools for keeping screen time in check",
     "scripts": {
         "prepare": "husky",
