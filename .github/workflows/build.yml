@@ -117,16 +117,18 @@ jobs:
           node-version: "20"
 
       - name: Install JavaScript dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Generate CHANGELOG and bump version
-        run: npm run release
-
-      - name: Push changelog commit and tag
+      - name: Set up Git
         run: |
-          git push origin HEAD:${GITHUB_REF#refs/heads/} --follow-tags
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate CHANGELOG and bump version
+        run: npm run release -- --release-as ${{ github.ref_name }} --no-push
+
 
       - name: Set up Xcode 15
         uses: maxim-lobanov/setup-xcode@v1
@@ -136,7 +138,7 @@ jobs:
       - name: Install create-dmg
         run: |
           brew install node
-          npm install --global create-dmg
+          brew install create-dmg
 
       - name: Build Release .app
         run: |
@@ -144,41 +146,85 @@ jobs:
             -scheme "BeeAway" \
             -configuration Release \
             -destination 'platform=macOS' \
-            clean build \
-            CODE_SIGN_IDENTITY="Developer ID Application: Your Name (TEAMID)" \
-            | xcpretty
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build | xcpretty
 
       - name: Copy `.app` to staging
         run: |
+          SETTINGS=$(xcodebuild \
+              -scheme "BeeAway" \
+              -configuration Release \
+              -destination 'platform=macOS' \
+              -showBuildSettings)
+
+          # Extract the CONFIGURATION_BUILD_DIR
+          BUILD_DIR=$(echo "$SETTINGS" \
+            | awk -F'= ' '/BUILD_DIR/ { print $2 }' \
+            | head -1)
+          
+          echo "Products are in: $BUILD_DIR"
+
           mkdir -p dist
-          cp -R build/Release/BeeAway.app dist/
+          cp -R "$BUILD_DIR/Release/BeeAway.app" dist/
 
       - name: Create DMG
         run: |
           create-dmg \
-            --overwrite \
             --volname "BeeAway Installer" \
             --background "resources/dmg-background.png" \
             --icon "BeeAway.app" 120 120 \
-            --icon "Applications" 400 120 \
+            --app-drop-link 400 120 \
             --window-size 540 300 \
-            dist/BeeAway.app \
-            dist/BeeAway-${{ github.ref_name }}.dmg
+            dist/BeeAway-${{ github.ref_name }}.dmg \
+            dist/
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          body_path: CHANGELOG.md
+      - name: Push changelog commit and tags
+        run: |
+          # always push HEAD into main branch
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload DMG to Release
-        uses: softprops/action-gh-release@v1
+      - name: Publish GitHub Release w/ DMG
+        uses: softprops/action-gh-release@v2
         with:
+          draft: false
+          prerelease: false
           tag_name: ${{ github.ref_name }}
           name: BeeAway-${{ github.ref_name }}.dmg
-          asset_path: dist/BeeAway-${{ github.ref_name }}.dmg
+          body_path: CHANGELOG.md
+          files: dist/BeeAway-${{ github.ref_name }}.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute SHA256 of DMG
+        id: compute-sha
+        run: |
+          VERSION=${GITHUB_REF_NAME}
+          DMG="dist/BeeAway-${VERSION}.dmg"
+          echo "Computing SHA256 for ${DMG}"
+          shasum -a 256 "$DMG" | awk '{print $1}' > sha.txt
+          SHA256=$(cat sha.txt)
+          echo "sha256=$SHA256" >> "$GITHUB_OUTPUT"
+        shell: bash
+
+      - name: Compute bare version
+        id: bare_version
+        run: |
+          # github.ref_name is "v0.0.1"
+          echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+
+      - name: Dispatch tap update
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.TAP_DISPATCH_TOKEN }}
+          repository: ragarwalll/homebrew-tap
+          event-type: bump-bee-away-cask
+          client-payload: |
+            {
+              "version": "${{ steps.bare_version.outputs.version }}",
+              "sha256": "${{ steps.compute-sha.outputs.sha256 }}",
+              "cask_name": "bee-away"
+            }

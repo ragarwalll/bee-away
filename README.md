@@ -31,7 +31,7 @@ brew install --cask BeeAway
 
 You can also tap a custom repo:
 ```bash
-brew tap yourorg/homebrew-BeeAway
+brew tap ragarwalll/tap
 brew install BeeAway
 ```
 
