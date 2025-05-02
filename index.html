@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline';"
+    />
+    <meta name="title" content="BeeAway" />
+    <meta
+      name="description"
+      content="BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low."
+    />
+
+    <link rel="canonical" href="https://therahulagarwal.com/bee-away" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Rahul Agarwal",
+        "jobTitle": "Full Stack Developer",
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Heritage Academy"
+          },
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "BITS Pilani"
+          }
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "SAP"
+        },
+        "url": "https://therahulagarwal.com",
+        "sameAs": [
+          "https://github.com/ragarwalll",
+          "https://www.linkedin.com/in/ragarwalll/",
+          "https://www.instagram.com/rahulllagarwalll/"
+        ]
+      }
+    </script>
+
+    <meta name="keywords" content="macOS status bar utility, keep awake, idle prevention, mouse wiggle, app ping, battery aware, power management, accessibility automation, notification keep-alive, custom duration, homebrew cask, BeeAway, menu-bar app, productivity tool, SwiftUI, Swift macOS app">
+
+    <meta name="author" content="Rahul Agarwal" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://therahulagarwal.com/bee-away" />
+    <meta property="og:title" content="BeeAway" />
+    <meta
+      property="og:description"
+      content="BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low."
+    />
+    <meta
+      property="og:site_name"
+      content="BeeAway - Lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout."
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <meta property="profile:first_name" content="Rahul" />
+    <meta property="profile:last_name" content="Agarwal" />
+    <meta property="profile:username" content="ragarwalll" />
+
+    <!-- TODO: -->
+    <meta
+      property="og:image"
+      content="https://therahulagarwal.com/images/banner.jpg"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="BeeAway Logo" />
+
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta name="classification" content="Utility" />
+    <meta name="target" content="all" />
+    <meta name="rating" content="General" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="./site.webmanifest.json" />
+    <link rel="icon" href="./favicon/favicon.ico" sizes="48x48" />
+    <link
+      rel="icon"
+      href="./favicon/favicon.svg"
+      sizes="any"
+      type="image/svg+xml"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <title>BeeAway</title>
+  </head>
+  <body>
+    <!-- header section -->
+    <object type="image/svg+xml" data="./favicon/favicon.svg" width="50">
+      Update your browser to support support SVG <-- displayed if svg is not
+      supported
+    </object>
+
+    <h1 class="no-margin-bottom no-margin-top">
+      <span class="lighter-weight">Rahul</span>
+      <span class="normal-weight">Agarwal</span>
+    </h1>
+
+    <i class="no-margin-top">Full Stack Developer.</i>
+    <!-- end of header section -->
+
+    <br /><br />
+
+    <!-- story section -->
+    <div class="changeable-section heading-link-activator">
+      <h2 class="inline-block no-margin-bottom">Here's my story</h2>
+      <a href="#my-story" class="heading-link">#</a>
+    </div>
+    <div class="about-fake">
+      <p>
+        I'm always on the lookout for new tech trends and ways to level up my
+        skills in <ins>everything</ins>. I'm particularly interested in
+        <ins>automating repetitive tasks</ins>. When I'm not coding, you can
+        find me scrolling
+        <a href="" target="_blank" class="new-anchor">YouTube</a>, sometimes
+        <a href="" target="_blank" class="new-anchor">Netflix</a>, or exploring
+        <a href="https://app.daily.dev/" target="_blank" class="new-anchor"
+          >new tech</a
+        >.
+      </p>
+    </div>
+    <!-- end of story section -->
+
+    <br />
+
+    <!-- who am I section -->
+    <div class="changeable-section heading-link-activator">
+      <h2 class="inline-block no-margin-bottom">Who am I?</h2>
+      <a href="#who-am-i" class="heading-link">#</a>
+    </div>
+    <div class="about-fake">
+      <p>Let me tell you about myself in the simplest way possible.</p>
+      <ul>
+        <li>Born in 1998 and raised in Kolkata, India.</li>
+        <li>
+          Completed my primary & secondary education from one of the most
+          <a
+            href="https://www.mpbfhsschool.com/"
+            target="_blank"
+            class="new-anchor"
+            >prestigious schools</a
+          >
+          in Kolkata.
+        </li>
+        <li>
+          Got enrolled into Heritage Academy for my Bachelors in Computer
+          Applications.
+        </li>
+        <li>
+          Learned a lot of things, made some good friends and had some fun
+          times.
+        </li>
+        <li>Got into the world of programming and never looked back.</li>
+        <li>
+          Started my career as a Software Engineer at a product company where
+          I'm still working at.
+        </li>
+        <li>
+          SAP has been my company for the past
+          <script>
+            // calculate the number of years since 2019
+            const years = new Date().getFullYear() - 2019;
+            document.write(years);
+          </script>
+          years and I've learned a lot of things there.
+        </li>
+        <li>Met some amazing people & some not so amazing people.</li>
+        <li>
+          Found a way to make a living out of something I'm passionate about.
+        </li>
+        <li>Also did my M.Tech in Software Engineering from BITS Pilani.</li>
+      </ul>
+    </div>
+    <!-- end of who am I section -->
+
+    <br />
+
+    <!-- what have I done section -->
+    <div class="changeable-section heading-link-activator">
+      <h2 class="inline-block no-margin-bottom">
+        What have I done to call myself a <strike>developer</strike> <br />full
+        stack developer?
+      </h2>
+      <a href="#what-have-i-done" class="heading-link">#</a>
+    </div>
+    <div class="about-fake">
+      <div class="heading-link-activator">
+        <h3 class="no-margin-bottom">
+          The Pixel Playground 👾
+          <a href="#pixel-playground" class="heading-link">#</a>
+        </h3>
+        <h5 class="no-margin-top lighter-weight">
+          I am talking about frontend development here
+        </h5>
+      </div>
+
+      <p>
+        It's about the pixel-perfect designs I learned to make. I started my
+        journey by learning HTML, CSS & JS. I then learned about frameworks like
+        React and Next.js. I also learned how to make pixel-perfect designs in
+        Figma and convert them into code.
+      </p>
+
+      <p>
+        I applied my knowledge when I also learned about SAP UI5. I made a few
+        projects using SAP UI5, and I must say, it was a great learning
+        experience.
+      </p>
+
+      <blockquote class="italic">
+        <span class="bold-weight">Design:</span> The pixel playground where
+        golden ratios craft stories. It's all about how
+        <a
+          href="https://www.mathsisfun.com/numbers/golden-ratio.html"
+          target="_blank"
+          class="new-anchor"
+          >1.61803</a
+        >
+        can tell a story.
+        <span class="author italic"
+          >~ Rahul Agarwal, Prompted by Claude.ai (3.5 Sonnet)</span
+        >
+      </blockquote>
+
+      <div class="heading-link-activator">
+        <h3 class="no-margin-bottom">
+          The Digital Nervous System 🧠
+          <a href="#digital-nervous-system" class="heading-link">#</a>
+        </h3>
+        <h5 class="no-margin-top lighter-weight">
+          More like the backend development, I don't know why I named it that.
+        </h5>
+      </div>
+
+      <p>
+        I started my journey with backend development by learning PHP & MySQL. I
+        also learned about REST APIs and how to make them. I then learned about
+        microservices and how to make them.
+      </p>
+
+      <p>
+        Things took a turn when I got to know about Spring Boot. How can it be
+        so complicated? Who will remember all these beans and annotations? But
+        then I started making small projects with it, and now I love it.
+      </p>
+
+      <p>
+        But well, JavaScript was close to my heart, so I had to make a few
+        projects with it. NodeJS, ExpressJS, NestJS, NextJS, ReactJS, AngularJS,
+        you name it & I have experience with it.
+      </p>
+
+      <blockquote class="italic">
+        <span class="bold-weight">Architecture:</span> The Digital Nervous
+        System where algorithms orchestrate symphonies. It's all about how
+        <a
+          href="https://dev.to/lofiandcode/big-o-part-3-log-of-n-3n2h"
+          target="_blank"
+          class="new-anchor"
+          >O(log n)</a
+        >
+        can conduct a masterpiece.
+        <span class="author italic"
+          >~ Rahul Agarwal, Prompted by ChatGPT (GPT-4)</span
+        >
+      </blockquote>
+
+      <div class="heading-link-activator">
+        <h3 class="no-margin-bottom">
+          The Bridge Between Worlds 🌉
+          <a href="#bridge-between-worlds" class="heading-link">#</a>
+        </h3>
+        <h5 class="no-margin-top lighter-weight">
+          I promise I won't use these fancy names anymore.
+        </h5>
+      </div>
+
+      <p>
+        Isn't Kubernetes just amazing? I am not a cloud guy, but I know how to
+        make a cluster, deploy an application, and make it available to the
+        world. I am not a networking guy, but I know how can I use NodePort,
+        LoadBalancer, and Ingress to make my application available to the world.
+        I am not a security guy, but I know how to make a secure application.
+      </p>
+
+      <p>
+        I used to find it hard to understand how people can make a career out of
+        this, but now I am becoming one of them. After I got to know about K8s,
+        Kyma, and Serverless, I was like what the heck!?
+      </p>
+
+      <p>
+        I also learned about Piper with Azure DevOps & made sure that the bridge
+        between us & customers is fast as possible. It has reduced the time to
+        value from months to weeks.
+      </p>
+
+      <blockquote class="italic">
+        <span class="bold-weight">Orchestration:</span> The Pipeline Playground
+        where automation conducts chaos into harmony. It's all about how CI/CD
+        can turn
+        <a
+          href="https://dev.to/lofiandcode/big-o-part-3-log-of-n-3n2h"
+          target="_blank"
+          class="new-anchor"
+          >99.9%</a
+        >
+        into a standing ovation.
+        <span class="author italic"
+          >~ Rahul Agarwal, Prompted by Gemini (1.5 Flash)</span
+        >
+      </blockquote>
+    </div>
+    <!-- end of what have I done section -->
+
+    <!-- project section -->
+    <div class="changeable-section">
+      <div class="heading-link-activator">
+        <h2 class="inline-block no-margin-bottom">
+          I like to be a perfectionist!
+        </h2>
+        <a href="#perfectionist" class="heading-link">#</a>
+      </div>
+
+      <p>
+        Whether it's about the code I write or the designs I make, I like to be
+        a perfectionist. I tend to be very particular about the quality of the
+        work I deliver. I like to make sure that the code I write is clean,
+        readable, and maintainable. I like to make sure that the designs I make
+        follow the basic principles of design.
+      </p>
+
+      <p>
+        The problem I face is whenever I start a project, I never complete it. I
+        bounce between too many ideas. I am trying to overcome this by making
+        sure that I complete the projects I start.
+      </p>
+
+      <!-- logo section -->
+      <div class="heading-link-activator">
+        <h3 class="inline-block no-margin-bottom">
+          Let's talk about the logo I made for myself.
+        </h3>
+        <a href="#logo" class="heading-link">#</a>
+      </div>
+
+      <p>
+        Well, we know that then golden ratio(φ) is <u><i>1.618033988</i></u
+        >. So I took a width of <u>200</u>. I then calculated the height by
+        dividing the width by φ. The height came out to be <u>323.6</u>.
+      </p>
+
+      <p>
+        Now to find how many squares I needed in width, I did
+        <u>round(sqrt(w / φ))</u> and for height I did
+        <u>round(sqrt(w * φ))</u>. So Now I have a grid of
+        <i>11 x 18 squares</i>.
+      </p>
+
+      <p>
+        Lastly, I also wanted to determine each square's size. So I divided
+        <u>w by the number of squares in width</u>, which comes around
+        <i>18.12</i>, and now I have everything I needed.
+      </p>
+      <div class="auto-grid">
+        <object
+          type="image/svg+xml"
+          data="images/logo-process/logo-design-1.svg"
+        >
+          Update your browser to support SVG
+        </object>
+        <object
+          type="image/svg+xml"
+          data="images/logo-process/logo-design-2.svg"
+        >
+          Update your browser to support SVG
+        </object>
+        <object
+          type="image/svg+xml"
+          data="images/logo-process/logo-design-3.svg"
+        >
+          Update your browser to support SVG
+        </object>
+        <object
+          type="image/svg+xml"
+          data="images/logo-process/logo-design-4.svg"
+        >
+          Update your browser to support SVG
+        </object>
+        <object
+          type="image/svg+xml"
+          data="images/logo-process/logo-design-5.svg"
+        >
+          Update your browser to support SVG
+        </object>
+        <object
+          type="image/svg+xml"
+          data="images/logo-process/logo-design-6.svg"
+        >
+          Update your browser to support SVG
+        </object>
+        <object
+          type="image/svg+xml"
+          data="images/logo-process/logo-design-7.svg"
+        >
+          Update your browser to support SVG
+        </object>
+        <object
+          type="image/svg+xml"
+          data="images/logo-process/logo-design-8.svg"
+        >
+          Update your browser to support SVG
+        </object>
+      </div>
+      <!-- end of logo section -->
+
+      <!-- project section -->
+      <div class="heading-link-activator">
+        <h3 class="inline-block no-margin-bottom">
+          Let's talk about the projects I have made.
+        </h3>
+        <a href="#projects" class="heading-link">#</a>
+      </div>
+
+      <p>
+        Most of the projects I've developed have been focused on automation.
+        Yes, by automation I mean actual automations, but it's not just limited
+        to that. I think for me automation is really different. It's not just
+        about making things easier but also about making things better. Whether
+        it's automating repeated tasks I do in the morning when I open my
+        laptop, whether it's the bootstrapping for projects I do in my company
+        when working on PoC, or whether it's about automating the process of
+        deploying the application to the cloud, I think automation is the key to
+        success.
+      </p>
+
+      <blockquote class="italic">
+        <span class="bold-weight">Automation:</span> The first rule of any
+        technology used in a business is that automation applied to an efficient
+        operation will magnify the efficiency.
+        <span class="author italic">~ Bill Gates</span>
+      </blockquote>
+    </div>
+    <div class="auto-grid auto-grid-2">
+      <!-- yellow circle -->
+      <div>
+        <div class="heading-link-activator">
+          <h4 class="inline-block no-margin-bottom">Yellow Circle</h4>
+          <a href="#yellow-circle" class="heading-link">#</a>
+          <h5 class="no-margin-top lighter-weight">
+            Can't link repo since it's internal
+          </h5>
+        </div>
+
+        <p>
+          I value mental health more than anything. One of the main reasons is
+          because I was never able to care about my own mental health before.
+          This is where I got involved in one of my company's initiatives: a
+          one-stop platform where employees can feel valued, cared for, and free
+          to talk about their mental health. The main goal of this project was
+          to impact the mental health of employees in a positive way. And seeing
+          the usage of the platform, I can say that we have been successful in
+          doing so.
+        </p>
+      </div>
+      <!-- end of yellow circle -->
+
+      <!-- SAP Cloud Application Generator -->
+      <div>
+        <div class="heading-link-activator">
+          <h4 class="inline-block no-margin-bottom">
+            SAP Cloud Application Generator
+          </h4>
+          <a href="#sap-cloud-application-generator" class="heading-link">#</a>
+          <h5 class="no-margin-top lighter-weight">
+            I'll link the repo soon |
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=ragarwal06.create-sap-fs-app-vsix"
+              target="_blank"
+              class="new-anchor"
+              >Marketplace</a
+            >
+          </h5>
+        </div>
+
+        <p>
+          This was one of the projects I did as part of my dissertation. I had
+          been working on various PoCs for about a year, managing everything
+          from development to production by myself. This included development,
+          deployment, and SAP standards. These experiences inspired me to create
+          a VSCode extension where developers can select their preferred
+          frontend and backend technologies. Additionally, they can opt-in for
+          SA-specific authentication, deployment, and other features. Along with
+          the VSCode extension, I also created CLI and UI versions of the same
+          tool. It has around 1.5K+ downloads
+        </p>
+      </div>
+      <!-- end of SAP Cloud Application Generator -->
+    </div>
+
+    <!-- sap book llm -->
+    <div>
+      <div class="heading-link-activator">
+        <h4 class="inline-block no-margin-bottom">Book LLM</h4>
+        <a href="#book-llm" class="heading-link">#</a>
+        <h5 class="no-margin-top lighter-weight">I'll link the repo soon</h5>
+      </div>
+      <p>
+        I have always tried to learn new things. AI was one of them. For me, the
+        main struggle was coding it. It's not that I was unable to code. But
+        what frustrated me was how simple it was. The theoretical part was so
+        complex, yet whenever I programmed it, the solution came out in just
+        5-10 lines. I think my ego was too big to handle that. So, I never
+        actually got into it.
+      </p>
+
+      <p>
+        But that changed when I got into one of the foundation courses at my
+        company. A month into the course, I learned about different concepts.
+        This inspired me to create a project where I could implement what I had
+        learned. That's when I created Book LLM. It's actually pretty simple,
+        and similar tools already exist. However, the main goal was to learn and
+        implement the concepts I had studied. Users can simply upload any kind
+        of document and query through it.
+      </p>
+
+      <p>
+        I added some extra features to make it stand out. The app has two parts:
+        one for beginners who just want quick answers through a simple UI, and
+        another for developers. The developer interface provides API access
+        where they can fine-tune the model, prepare a pipeline for document
+        splitting, and customize the entire RAG model. It was pretty sick to be
+        honest.
+      </p>
+    </div>
+    <!-- end of sap book llm -->
+
+    <div>
+      <div class="heading-link-activator">
+        <h4 class="inline-block no-margin-bottom">Vitagen</h4>
+        <a href="#vitagen" class="heading-link">#</a>
+        <h5 class="no-margin-top no-margin-bottom lighter-weight">
+          Not proud of the name.
+        </h5>
+        <h5 class="no-margin-top lighter-weight">
+          <a
+            href="https://github.com/ragarwalll/rahul-resume"
+            target="_blank"
+            class="new-anchor"
+            >Source Code</a
+          >
+          |
+          <a
+            href="https://therahulagarwal.com/rahul-resume/"
+            target="_blank"
+            class="new-anchor"
+            >Documentation</a
+          >
+        </h5>
+      </div>
+
+      <p>
+        It's a simple project inspired by
+        <a href="https://debarghyadas.com/" target="_blank" class="new-anchor"
+          >Deedy</a
+        >. For those unfamiliar, Deedy is a well-known developer who created a
+        <a
+          href="https://github.com/deedy/deedy-resume/"
+          target="_blank"
+          class="new-anchor"
+          >LaTeX template for resumes</a
+        >. It was created
+        <script>
+          const deedyYears = new Date().getFullYear() - 2015;
+          document.write(deedyYears);
+        </script>
+        years back. My project takes that concept further - think of it as
+        Deedy's template on steroids. Users can store their resume data in a
+        structured JSON file, then either upload it to a GitHub issue or create
+        a PR. A bot automatically detects the submission and generates beautiful
+        resumes. The output is highly configurable - you can choose between
+        two-column or single-column layouts, different fonts, and other styling
+        options. I implemented the golden ratio in the design because I'm
+        passionate about mathematical aesthetics.
+      </p>
+    </div>
+    <!-- end of project section -->
+
+    <!-- hobbies section-->
+    <div class="changeable-section">
+      <div class="heading-link-activator">
+        <h2 class="inline-block no-margin-bottom">
+          More than just a developer, I'm a human too.
+        </h2>
+        <a href="#hobbies" class="heading-link">#</a>
+      </div>
+
+      <h3 class="no-margin-top lighter-weight">Let's talk about my hobbies.</h3>
+
+      <p>
+        I discovered my love for exploring new things during COVID. I started
+        cooking - mainly momos, since I couldn't find them anywhere. I learned
+        guitar, and the first and last song I learned was
+        <a
+          href="https://music.apple.com/in/album/channa-mereya/1174924228?i=1174924387"
+          target="_blank"
+          class="new-anchor"
+          >'Channa Mereya.'</a
+        >
+        I picked up skateboarding, which humorously resulted in three stitches
+        on my chin. I love art and create portraits as well. I have a soft spot
+        for tattoos and currently have six of them.
+      </p>
+
+      <p>
+        Apart from that, I never enjoyed reading books. But I was very
+        fascinated by
+        <a
+          href="https://www.goodreads.com/book/show/11084145-steve-jobs"
+          target="_blank"
+          class="new-anchor"
+          >Steve Jobs by Walter Isaacson</a
+        >
+        and his interviews. So I started reading his biography. I'll update once
+        I finish it.
+      </p>
+    </div>
+    <!-- end of hobbies section -->
+
+    <!-- contact section -->
+    <div class="changeable-section">
+      <div class="heading-link-activator">
+        <h2 class="inline-block no-margin-bottom">
+          Find me on these platforms.
+        </h2>
+        <a href="#contact" class="heading-link">#</a>
+      </div>
+      <div class="contact-wrapper">
+        <a
+          href="https://github.com/ragarwalll"
+          target="_blank"
+          class="new-anchor"
+          >GitHub</a
+        >
+        ⊙
+        <a
+          href="https://www.linkedin.com/in/ragarwalll/"
+          target="_blank"
+          class="new-anchor"
+          >LinkedIn</a
+        >
+        ⊙
+        <a
+          href="mailto:contact@therahulagarwal.com"
+          target="_blank"
+          class="new-anchor"
+          >contact@therahulagarwal.com</a
+        >
+        ⊙
+        <a
+          href="mailto:agarwal.rahul324@gmail.com"
+          target="_blank"
+          class="new-anchor"
+          >agarwal.rahul324@gmail.com</a
+        >
+        ⊙
+        <a
+          href="https://bsky.app/profile/therahulagarwal.com"
+          target="_blank"
+          class="new-anchor"
+          >BlueSky</a
+        >
+        ⊙
+        <a
+          href="https://www.instagram.com/rahulllagarwalll/"
+          target="_blank"
+          class="new-anchor"
+          >Instagram</a
+        >
+      </div>
+    </div>
+    <!-- end of contact section -->
+
+    <!-- footer section/copyright section -->
+    <footer class="some-margin-top">
+      <p>
+        Copyright © Rahul Agarwal
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        <i
+          ><br />find my resume
+          <a
+            href="./4c1b0028e20cb608cbaeedb9b15b72f9b2be7b1b7a27b3d2f1828ef6198485a8/rahul-agarwal-resume.pdf"
+            target="_blank"
+            class="new-anchor"
+            >here</a
+          >.</i
+        >
+        <i
+          ><br />find the source code
+          <a
+            href="https://github.com/ragarwalll/ragarwalll.github.io"
+            target="_blank"
+            class="new-anchor"
+            >here</a
+          >.</i
+        >
+      </p>
+    </footer>
+    <!-- end of footer section -->
+
+    <!-- linking script sections -->
+    <script type="text/javascript" src="./script.js" defer></script>
+  </body>
+</html>
