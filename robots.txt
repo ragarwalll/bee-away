@@ -4,7 +4,7 @@ Allow: /images/
 Allow: /favicon/
 
 # Sitemaps
-Sitemap: https://therahulagarwal.com/sitemap.xml
+Sitemap: https://therahulagarwal.com/bee-away/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 10

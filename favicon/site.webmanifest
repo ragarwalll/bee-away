@@ -2,7 +2,7 @@
   "name": "BeeAway",
   "short_name": "BeeAway",
   "description": "Lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout",
-  "start_url": "/",
+  "start_url": "/bee-away",
   "display": "standalone",
   "background_color": "#101010",
   "theme_color": "#b7ab98",
