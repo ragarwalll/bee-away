@@ -1,8 +1,27 @@
-# BeeAway
+# BeeAway <img src="logo.svg" width="24" />
 
 BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low.
 
----
+Please find more details [here](https://therahulagarwal.com/bee-away)
+
+## Installation
+
+### Download & Drag-and-Drop
+1. Download the latest signed & notarized `.dmg` from the [Releases](#) page.  
+2. Open the `.dmg` and drag **BeeAway** to your **Applications** folder.  
+3. Launch **BeeAway**. Grant Accessibility and Notification permissions when prompted.
+
+### Homebrew
+If you prefer Homebrew:
+```bash
+brew install --cask BeeAway
+```
+
+You can also tap a custom repo:
+```bash
+brew tap yourorg/homebrew-BeeAway
+brew install BeeAway
+```
 
 ## Features
 
@@ -37,29 +56,6 @@ BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active”
   - **Reset Permissions:** Clear first-run state and re-invoke onboarding.  
   - **Preferences:** Choose bound apps and manage “Launch at Login” (if enabled).
 
----
-
-## Installation
-
-### Download & Drag-and-Drop
-1. Download the latest signed & notarized `.dmg` from the [Releases](#) page.  
-2. Open the `.dmg` and drag **BeeAway** to your **Applications** folder.  
-3. Launch **BeeAway**. Grant Accessibility and Notification permissions when prompted.
-
-### Homebrew
-If you prefer Homebrew:
-```bash
-brew install --cask BeeAway
-```
-
-You can also tap a custom repo:
-```bash
-brew tap yourorg/homebrew-BeeAway
-brew install BeeAway
-```
-
----
-
 ## Usage
 
 1. Click the menu-bar icon to open the menu.  
@@ -70,8 +66,6 @@ brew install BeeAway
 4. To stop keep-alive at any time, choose **Stop Keep-Alive** (⌃ T).  
 5. The app auto-pauses if battery falls below the low-battery threshold (default 20%) and resumes on AC.
 
----
-
 ## Permissions
 
 - **Accessibility**  
@@ -81,50 +75,6 @@ brew install BeeAway
   Used to notify on low battery. Grant in **System Settings → Notifications → BeeAway**.
 
 The first-run onboarding window will guide you through granting these automatically.
-
----
-
-## Development
-
-### Requirements
-
-- macOS 12.0+  
-- Xcode 15+  
-- Swift 5.8+
-
-### Building
-
-```bash
-git clone https://github.com/yourorg/BeeAway.git
-cd BeeAway
-open BeeAway.xcodeproj
-```
-
-1. Select the **BeeAway** scheme and build/run (⌘ R).  
-2. For distribution, switch to **Release** configuration and **Archive** (Product → Archive).
-
-### Configuration
-
-- **Info.plist**  
-  - `LSUIElement` = `YES` (agent app)  
-  - `NSAccessibilityUsageDescription` = “BeeAway needs Accessibility permission to simulate input.”  
-  - `NSUserNotificationAlertStyle` = `alert`
-
-- **Signing & Capabilities**  
-  - Disable App Sandbox  
-  - Enable Hardened Runtime  
-  - Add “Temporary Exception: AppleEvents” if needed.
-
----
-
-## Packaging & Notarization
-
-1. In Xcode, select **Archive** (Product → Archive).  
-2. Export as **Developer ID–signed** application.  
-3. Submit to Apple for notarization via `xcrun altool` or Xcode Organizer.  
-4. Staple the notarization ticket to the `.app` before distribution.
-
----
 
 ## Troubleshooting
 
@@ -137,13 +87,9 @@ open BeeAway.xcodeproj
 - **Low-Battery Pause**  
   Adjust `batteryLowThreshold` in `StatusBarManager.swift` if you want a different cutoff.
 
----
-
 ## Contributing
 
 Contributions and bug reports are welcome! Please open issues or pull requests on [GitHub](https://github.com/yourorg/BeeAway).
-
----
 
 ## License
 

@@ -88,7 +88,12 @@ class StatusBarManager: NSObject, NSWindowDelegate {
         guard let statusBarItem = statusBarItem else { return }
         guard let button = statusBarItem.button else { return }
 
-        button.image = NSImage(named: NSImage.statusAvailableName)
+        if let img = NSImage(named: "BeeVector") {
+            img.isTemplate = false
+            button.image = img
+        } else {
+            button.title = "🐝"
+        }
         button.image?.isTemplate = true
         button.target = self
         button.action = #selector(showMenu(_:))
