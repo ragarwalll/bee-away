@@ -11,6 +11,7 @@ disabled_rules:
   - function_body_length
   - static_over_final_class
   - file_length
+  - trailing_comma
 
 # You can also configure individual rules instead of disabling them:
 opt_in_rules:

@@ -5,7 +5,6 @@
 //  Created by Agarwal, Rahul on 02/05/25.
 //
 
-import AppKit
 import Cocoa
 import SwiftUI
 import UserNotifications
@@ -27,7 +26,7 @@ private func showNotificationDeniedAlert(message: String) {
 
 @main
 struct BeeAwayApp: App {
-    private let statusBarManager = StatusBarManager()
+    private let statusBarManager = StatusBarManager.shared
     private let authorizer: NotificationAuthorizing
 
     init() {

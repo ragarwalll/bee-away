@@ -8,8 +8,14 @@
 import AppKit
 import Cocoa
 import IOKit.ps
+import IOKit.pwr_mgt
 import SwiftUI
 import UserNotifications
+
+extension Notification.Name {
+    static let didUpdateIdleTimeouts =
+        Notification.Name("BeeAway.didUpdateIdleTimeouts")
+}
 
 private func powerSourceChanged(
     _ context: UnsafeMutableRawPointer?
@@ -22,10 +28,13 @@ private func powerSourceChanged(
 }
 
 class StatusBarManager: NSObject, NSWindowDelegate {
+    static let shared = StatusBarManager()
+
     // Status-bar Menu
     var statusBarItem: NSStatusItem?
-    var movementTimer: DispatchSourceTimer?
-    var eventMonitor: Any?
+    var wiggleTimer: DispatchSourceTimer?
+    private var globalEventMonitor: Any?
+    private var localEventMonitor: Any?
     private var lastUserEventTime = Date()
 
     // Menu Items
@@ -43,14 +52,26 @@ class StatusBarManager: NSObject, NSWindowDelegate {
 
     // Others
     private let batteryLowThreshold: Int = 20
-    var psRunLoopSrc: CFRunLoopSource?
+    private var psRunLoopSrc: CFRunLoopSource?
     var durationTimer: Timer?
     private(set) var isOnAC = false
+    private var hasNotifiedLowBattery = false
+    private var trustPollTimer: Timer?
 
-    override init() {
+    // screen assertion
+    private var displayAssertionID: IOPMAssertionID = 0
+    private var assertionActive = false
+
+    // countdown
+    private var countdownTimer: Timer?
+    private var remainingSecs: TimeInterval = 0
+
+    override private init() {
         super.init()
         subscribeToPowerNotifications()
-        readPmsetIdleTimeouts()
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            self?.readPmsetIdleTimeouts()
+        }
         startUserInputMonitor()
 
         let defaults = UserDefaults.standard
@@ -60,6 +81,16 @@ class StatusBarManager: NSObject, NSWindowDelegate {
             defaults.set(true, forKey: "HasLaunchedBefore")
             DispatchQueue.main.async { self.showOnboarding() }
         }
+
+        let nc = NSWorkspace.shared.notificationCenter
+        nc.addObserver(self,
+                       selector: #selector(willSleep(_:)),
+                       name: NSWorkspace.willSleepNotification,
+                       object: nil)
+        nc.addObserver(self,
+                       selector: #selector(didWake(_:)),
+                       name: NSWorkspace.didWakeNotification,
+                       object: nil)
     }
 
     deinit {
@@ -68,17 +99,40 @@ class StatusBarManager: NSObject, NSWindowDelegate {
             CFRunLoopRemoveSource(
                 CFRunLoopGetCurrent(),
                 src,
-                CFRunLoopMode.defaultMode
+                .defaultMode
             )
+            psRunLoopSrc = nil
         }
 
-        // 2) Remove your global event monitor
-        if let monitor = eventMonitor {
-            NSEvent.removeMonitor(monitor)
-        }
+        // 2) Remove both global & local event monitors
+        if let m = globalEventMonitor { NSEvent.removeMonitor(m) }
+        if let m = localEventMonitor { NSEvent.removeMonitor(m) }
 
         // 3) Remove any NotificationCenter observers you've registered
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .didUpdateIdleTimeouts,
+            object: nil
+        )
+
+        NSWorkspace.shared.notificationCenter.removeObserver(self)
+
+        // 4) Invalidate the trust‐poll timer
+        trustPollTimer?.invalidate()
+        trustPollTimer = nil
+    }
+
+    @objc private func willSleep(_: Notification) {
+        // release assertion so system can sleep
+        setDisplayAssertion(active: false)
+    }
+
+    @objc private func didWake(_: Notification) {
+        // re-apply only if we’re still “running”
+        if stopItem.isEnabled {
+            setDisplayAssertion(active: true)
+            scheduleWiggleTimer()
+        }
     }
 
     // Main function to setup the status bar
@@ -89,7 +143,7 @@ class StatusBarManager: NSObject, NSWindowDelegate {
         guard let button = statusBarItem.button else { return }
 
         if let img = NSImage(named: "BeeVector") {
-            img.isTemplate = false
+            img.isTemplate = true
             button.image = img
         } else {
             button.title = "🐝"
@@ -104,7 +158,7 @@ class StatusBarManager: NSObject, NSWindowDelegate {
 
         // setup start menu
         self.startItem = NSMenuItem(
-            title: "Start Keep-Alive",
+            title: NSLocalizedString("Start Keep-Alive", comment: "Menu item"),
             action: #selector(startKeepAlive),
             keyEquivalent: "s"
         )
@@ -116,7 +170,7 @@ class StatusBarManager: NSObject, NSWindowDelegate {
 
         // setup stop menu
         self.stopItem = NSMenuItem(
-            title: "Stop Keep-Alive",
+            title: NSLocalizedString("Stop Keep-Alive", comment: "Menu item"),
             action: #selector(stopKeepAlive),
             keyEquivalent: "t"
         )
@@ -220,21 +274,47 @@ class StatusBarManager: NSObject, NSWindowDelegate {
             }
         }
 
-        // 3) Immediately start keep-alive
+        // 3) Determine duration
+        guard let num = sender.representedObject as? NSNumber,
+              num.doubleValue > 0 else {
+            // indefinite
+            startKeepAlive()
+            return
+        }
+        let secs = num.doubleValue
+
+        // start & schedule
         startKeepAlive()
 
-        // 4) If sender.representedObject = nil → indefinite → bail
-        guard let num = sender.representedObject as? NSNumber,
-              num.doubleValue > 0
-        else { return }
-
-        // 5) Schedule auto-stop
-        let secs = num.doubleValue
         durationTimer = Timer.scheduledTimer(
             withTimeInterval: secs,
             repeats: false
         ) { [weak self] _ in
             self?.stopKeepAlive()
+        }
+
+        remainingSecs = secs
+        startCountdown()
+    }
+
+    private func startCountdown() {
+        countdownTimer?.invalidate()
+        countdownTimer = Timer.scheduledTimer(
+            withTimeInterval: 1, repeats: true
+        ) { [weak self] t in
+            guard let s = self else { return }
+            s.remainingSecs -= 1
+            let m = Int(s.remainingSecs) / 60
+            let sss = Int(s.remainingSecs) % 60
+            s.stopItem.title = String(
+                format: NSLocalizedString("Stop in %02d:%02d",
+                                          comment: "Remaining time"),
+                m, sss
+            )
+            if s.remainingSecs <= 0 {
+                t.invalidate()
+                s.countdownTimer = nil
+            }
         }
     }
 
@@ -253,27 +333,38 @@ class StatusBarManager: NSObject, NSWindowDelegate {
             showOnboarding()
             return
         }
+        // grab a display‐sleep assertion
+        setDisplayAssertion(active: true)
 
         scheduleWiggleTimer()
-
         startItem?.isEnabled = false
         stopItem?.isEnabled = true
+
+        startItem.title = "Keep-Alive Running…"
         print("▶️ Keep-Alive started")
     }
 
     // function to stop the process
     @objc func stopKeepAlive() {
-        movementTimer?.cancel()
-        movementTimer = nil
+        wiggleTimer?.cancel()
+        wiggleTimer = nil
+
+        durationTimer?.invalidate()
+        durationTimer = nil
+
+        // release the assertion
+        setDisplayAssertion(active: false)
 
         startItem?.isEnabled = true
         stopItem?.isEnabled = false
+
+        startItem.title = "Start Keep-Alive"
         print("❌ Keep-Alive stopped")
     }
 
     // function to calcuate if wiggle or not
     private func scheduleWiggleTimer() {
-        movementTimer?.cancel()
+        wiggleTimer?.cancel()
         updatePowerState()
 
         // calcuate next idle in
@@ -290,18 +381,17 @@ class StatusBarManager: NSObject, NSWindowDelegate {
                 self.moveMouseSlightly()
                 self.pingBoundApps()
             }
-            self.lastUserEventTime = Date()
             self.scheduleWiggleTimer()
         }
         timer.resume()
-        movementTimer = timer
+        wiggleTimer = timer
     }
 
     // check if user in handling
     private func startUserInputMonitor() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.eventMonitor = NSEvent.addGlobalMonitorForEvents(
+            self.globalEventMonitor = NSEvent.addGlobalMonitorForEvents(
                 matching: [.mouseMoved, .leftMouseDown, .rightMouseDown,
                            .keyDown, .keyUp]
             ) { [weak self] _ in
@@ -310,6 +400,17 @@ class StatusBarManager: NSObject, NSWindowDelegate {
                 if self.stopItem.isEnabled {
                     self.scheduleWiggleTimer()
                 }
+            }
+            // local monitor (for events in your own app windows)
+            self.localEventMonitor = NSEvent.addLocalMonitorForEvents(
+                matching: [.mouseMoved, .leftMouseDown, .rightMouseDown,
+                           .keyDown, .keyUp]
+            ) { [weak self] evt in
+                self?.lastUserEventTime = Date()
+                if self?.stopItem.isEnabled == true {
+                    self?.scheduleWiggleTimer()
+                }
+                return evt
             }
         }
         print("👀 User input monitor started")
@@ -345,6 +446,7 @@ class StatusBarManager: NSObject, NSWindowDelegate {
             powerSourceChanged,
             ctx
         )?.takeRetainedValue() {
+            psRunLoopSrc = source
             CFRunLoopAddSource(runLoop, source, .defaultMode)
         }
     }
@@ -368,10 +470,14 @@ class StatusBarManager: NSObject, NSWindowDelegate {
                 let pct = Int((Double(current) / Double(max)) * 100.0)
                 // If below threshold, auto-stop
                 if pct <= batteryLowThreshold {
-                    if stopItem.isEnabled {
+                    if stopItem.isEnabled && !hasNotifiedLowBattery {
                         stopKeepAlive()
                         notifyBatteryLow(pct)
+                        hasNotifiedLowBattery = true
                     }
+                } else {
+                    // battery recovered above threshold → clear flag
+                    hasNotifiedLowBattery = false
                 }
             }
         }
@@ -427,6 +533,17 @@ class StatusBarManager: NSObject, NSWindowDelegate {
             }
         }
 
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(
+                name: .didUpdateIdleTimeouts,
+                object: nil,
+                userInfo: [
+                    "battery": self.batteryIdleTimeout,
+                    "ac": self.acIdleTimeout,
+                ]
+            )
+        }
+
         print("Battery idle timeout: \(batteryIdleTimeout) seconds")
         print("AC idle timeout: \(acIdleTimeout) seconds")
     }
@@ -440,12 +557,10 @@ class StatusBarManager: NSObject, NSWindowDelegate {
         app.activate(options: [.activateAllWindows])
 
         // Optionally return focus to ourselves:
-        if let runningApp = NSRunningApplication
-            .runningApplications(
-                withBundleIdentifier:
-                Bundle.main.bundleIdentifier!
-            )
-            .first {
+        if let ourBundleID = Bundle.main.bundleIdentifier,
+           let runningApp = NSRunningApplication
+           .runningApplications(withBundleIdentifier: ourBundleID)
+           .first {
             runningApp.activate(options: [.activateAllWindows])
         }
     }
@@ -584,12 +699,37 @@ class StatusBarManager: NSObject, NSWindowDelegate {
         }
     }
 
+    private func setDisplayAssertion(active: Bool) {
+        if active, !assertionActive {
+            let reason = "BeeAway keep-alive" as CFString
+            let res = IOPMAssertionCreateWithName(
+                kIOPMAssertionTypePreventUserIdleDisplaySleep as CFString,
+                IOPMAssertionLevel(kIOPMAssertionLevelOn),
+                reason,
+                &displayAssertionID
+            )
+            guard res == kIOReturnSuccess else {
+                NSLog("⚠️ Failed to create display assertion: \(res)")
+                return
+            }
+            assertionActive = true
+        } else if !active, assertionActive {
+            IOPMAssertionRelease(displayAssertionID)
+            assertionActive = false
+            displayAssertionID = 0
+        }
+    }
+
     // Manage app lifecycle
     // Quit app before confirmation
     @objc private func quitApp() {
         let alert = NSAlert()
-        alert.messageText = "Quit BeeAway 😔"
-        alert.informativeText = "Are you sure you want to be away & offline?"
+        alert.messageText = NSLocalizedString("Quit BeeAway 😔",
+                                              comment: "Alert title")
+        alert.informativeText = NSLocalizedString(
+            "Are you sure you want to be away & offline?",
+            comment: "Quit confirmation"
+        )
         alert.alertStyle = .warning
         alert.addButton(withTitle: "Quit")
         alert.addButton(withTitle: "Cancel")
