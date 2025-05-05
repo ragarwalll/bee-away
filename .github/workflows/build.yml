@@ -218,7 +218,7 @@ jobs:
 
 
       - name: Dispatch tap update
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.TAP_DISPATCH_TOKEN }}
           repository: ragarwalll/homebrew-tap
