@@ -1,4 +1,23 @@
-<!DOCTYPE html><html lang=en><head> <meta charset=UTF-8> <meta name=viewport content="width=device-width,initial-scale=1"> <meta http-equiv=X-UA-Compatible content="IE=edge"> <meta http-equiv=Content-Security-Policy content="default-src 'self'; script-src 'self' 'unsafe-inline';"> <meta name=title content=BeeAway> <meta name=description content="BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low."> <link rel=canonical href=https://therahulagarwal.com/bee-away> <script type=application/ld+json> {
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline';"
+    />
+    <meta name="title" content="BeeAway" />
+    <meta
+      name="description"
+      content="BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low."
+    />
+
+    <link rel="canonical" href="https://therahulagarwal.com/bee-away" />
+
+    <script type="application/ld+json">
+      {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Rahul Agarwal",
@@ -23,15 +42,285 @@
           "https://www.linkedin.com/in/ragarwalll/",
           "https://www.instagram.com/rahulllagarwalll/"
         ]
-      } </script> <meta name=keywords content="macOS status bar utility, keep awake, idle prevention, mouse wiggle, app ping, battery aware, power management, accessibility automation, notification keep-alive, custom duration, homebrew cask, BeeAway, menu-bar app, productivity tool, SwiftUI, Swift macOS app"> <meta name=c-blockquote__author content="Rahul Agarwal"> <meta name=robots content="index, follow"> <meta property=og:type content=website> <meta property=og:url content=https://therahulagarwal.com/bee-away> <meta property=og:title content=BeeAway> <meta property=og:description content="BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low."> <meta property=og:site_name content="BeeAway - Lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout."> <meta property=og:locale content=en_US> <meta property=profile:first_name content=Rahul> <meta property=profile:last_name content=Agarwal> <meta property=profile:username content=ragarwalll> <meta property=og:image content=https://therahulagarwal.com/bee-away/images/banner.jpg> <meta property=og:image:type content=image/jpeg> <meta property=og:image:alt content="BeeAway Logo"> <meta http-equiv=Cache-Control content="no-cache, no-store, must-revalidate"> <meta http-equiv=Pragma content=no-cache> <meta http-equiv=Expires content=0> <meta name=classification content=Utility> <meta name=target content=all> <meta name=rating content=General> <link rel=apple-touch-icon sizes=180x180 href=./favicon/apple-touch-icon.png> <link rel=manifest href=./site.webmanifest.json> <link rel=icon href=./favicon/favicon.ico sizes=48x48> <link rel=icon href=./favicon/favicon.svg sizes=any type=image/svg+xml> <link rel=manifest href=./favicon/site.webmanifest> <link rel=mask-icon href=./favicon/safari-pinned-tab.svg> <meta name=msapplication-TileColor content=#da532c> <meta name=theme-color content=#ffffff> <title>BeeAway</title> <link rel=stylesheet href=css/bundle.min.cd363370.css></head> <body> <object type=image/svg+xml data=img/favicon/favicon.svg width=150> Update your browser to support support SVG &lt;-- displayed if svg is not supported </object> <h1 class="u-mb-none u-mt-none"> <span class=u-text-light>Bee<span class=u-text-regular>Away</span></span> </h1> <i class=u-mt-none>Be Online while Being Away.</i> <br><br> <div class="changeable-section c-heading-anchor"> <h2 class="u-inline u-mb-none">How to Download?</h2> <a href=#download class=c-heading-anchor__link>#</a> </div> <div class=about-fake> <div class="c-auto-grid c-auto-grid--wide"> <div> ① Using Homebrew (advised): <pre class=code-snippet>brew tap ragarwalll/homebrew-tap
+      }
+    </script>
+
+    <meta
+      name="keywords"
+      content="macOS status bar utility, keep awake, idle prevention, mouse wiggle, app ping, battery aware, power management, accessibility automation, notification keep-alive, custom duration, homebrew cask, BeeAway, menu-bar app, productivity tool, SwiftUI, Swift macOS app"
+    />
+
+    <meta name="author" content="Rahul Agarwal" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://therahulagarwal.com/bee-away" />
+    <meta property="og:title" content="BeeAway" />
+    <meta
+      property="og:description"
+      content="BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low."
+    />
+    <meta
+      property="og:site_name"
+      content="BeeAway - Lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout."
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <meta property="profile:first_name" content="Rahul" />
+    <meta property="profile:last_name" content="Agarwal" />
+    <meta property="profile:username" content="ragarwalll" />
+
+    <meta
+      property="og:image"
+      content="https://therahulagarwal.com/bee-away/images/banner.jpg"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="BeeAway Logo" />
+
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta name="classification" content="Utility" />
+    <meta name="target" content="all" />
+    <meta name="rating" content="General" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="./site.webmanifest.json" />
+    <link rel="icon" href="./favicon/favicon.ico" sizes="48x48" />
+    <link
+      rel="icon"
+      href="./favicon/favicon.svg"
+      sizes="any"
+      type="image/svg+xml"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <title>BeeAway</title>
+  </head>
+  <body>
+    <!-- header section -->
+    <object type="image/svg+xml" data="./favicon/favicon.svg" width="150">
+      Update your browser to support support SVG <-- displayed if svg is not
+      supported
+    </object>
+
+    <h1 class="no-margin-bottom no-margin-top">
+      <span class="lighter-weight"
+        >Bee<span class="normal-weight">Away</span></span
+      >
+    </h1>
+
+    <i class="no-margin-top">Be Online while Being Away.</i>
+    <!-- end of header section -->
+
+    <br /><br />
+
+    <!-- download section -->
+    <div class="changeable-section heading-link-activator">
+      <h2 class="inline-block no-margin-bottom">How to Download?</h2>
+      <a href="#download" class="heading-link">#</a>
+    </div>
+    <p></p>
+    <div class="about-fake">
+      <div class="auto-grid auto-grid-2">
+        <div>
+          ① Using Homebrew (advised):
+          <pre class="code-snippet">
+brew tap ragarwalll/homebrew-tap
 brew install --cask bee-away
-          </pre> </div> <div> ② GitHub Release <pre class=code-snippet><a href=https://github.com/ragarwalll/bee-away/releases/latest target=_blank class="u-link-clean latest-release">BeeAway-latest.dmg</a>
-          </pre> </div> </div> </div> <div class=c-heading-anchor> <h3 class="u-inline-block u-mb-none">Let's talk about the top features of BeeAway.</h3> <a href=#features class=c-heading-anchor__link>#</a> </div> <div class="c-auto-grid c-auto-grid--wide"> <div> <div class=c-heading-anchor> <h4 class="u-inline-block u-mb-none">Simulate Mouse Movement</h4> <a href=#simulate-mouse-movement class=c-heading-anchor__link>#</a> <h5 class="u-mt-none u-text-light"> Simulate mouse movement to keep the Mac awake and active </h5> </div> <img src=img/images/preview.jpg alt="BeeAway Preview" class=preview-image width=100% height=auto loading=lazy decoding=async> </div> <div> <div class=c-heading-anchor> <h4 class="u-inline-block u-mb-none">App Focus Simulation</h4> <a href=#app-focus-simulation class=c-heading-anchor__link>#</a> <h5 class="u-mt-none u-text-light"> For apps selected, it simulates focus by pinging the app icon in the menu bar </h5> </div> <img src=img/images/preview-prefs.jpg alt="BeeAway Preview" class=preview-image width=100% height=auto loading=lazy decoding=async> </div> </div> <div class=c-heading-anchor> <h4 class="u-inline-block u-mb-none">Other Features</h4> <a href=#other-features class=c-heading-anchor__link>#</a> <h5 class="u-mt-none u-text-light"> Kindly ignore, added to sounds fancy </h5> </div> <ul> <li>Simulate mouse movement to keep the Mac awake and active.</li> <li> For apps selected, it simulates focus by pinging the app icon in the menu bar. </li> <li>Adapts to battery vs. AC power.</li> <li>Supports custom activation durations.</li> <li>Pauses itself when battery is low.</li> <li>Adapts to the timeout of the system.</li> <li>Lightweight and easy to use.</li> <li>Built with SwiftUI, making it a native macOS application.</li> <li> Open-source and available on GitHub for anyone to contribute or use. </li> </ul> <div class="changeable-section c-heading-anchor"> <h2 class="u-inline u-mb-none">Find me on these platforms.</h2> <a href=#contact class=c-heading-anchor__link>#</a> </div>  <div class=c-contact> <a href=https://github.com/ragarwalll target=_blank class=u-link-clean>GitHub</a> ⊙ <a href=https://www.linkedin.com/in/ragarwalll/ target=_blank class=u-link-clean>LinkedIn</a> ⊙ <a href=mailto:contact@therahulagarwal.com target=_blank class=u-link-clean>contact@therahulagarwal.com</a> ⊙ <a href=mailto:agarwal.rahul324@gmail.com target=_blank class=u-link-clean>agarwal.rahul324@gmail.com</a> ⊙ <a href=https://bsky.app/profile/therahulagarwal.com target=_blank class=u-link-clean>BlueSky</a> ⊙ <a href=https://www.instagram.com/rahulllagarwalll/ target=_blank class=u-link-clean>Instagram</a> </div> <br><br> <footer class=some-margin-top> <p> Copyright © Rahul Agarwal <script> document.write(new Date().getFullYear()); </script> <i><br>find the source code <a href=https://github.com/ragarwalll/bee-away target=_blank class=u-link-clean>here</a>.</i> <i><br>find my portfolio <a href=https://therahulagarwal.com/ target=_blank class=u-link-clean>here</a>.</i> </p> </footer> <script src=js/bundle.min.e8b1eb9c.js defer=""></script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(reg=> console.log('SW registered', reg))
-    .catch(err=> console.error('SW failed', err));
-}
-</script>
-</body></html>
+          </pre>
+        </div>
+        <div>
+          ② GitHub Release
+          <pre class="code-snippet">
+<a href="https://github.com/ragarwalll/bee-away/releases/latest" target="_blank" class="new-anchor latest-release">BeeAway-latest.dmg</a>
+          </pre>
+        </div>
+      </div>
+    </div>
+    <!-- end of download section -->
+
+    <br />
+
+    <div class="heading-link-activator">
+      <h3 class="inline-block no-margin-bottom">
+        Let's talk about the top features of BeeAway.
+      </h3>
+      <a href="#features" class="heading-link">#</a>
+    </div>
+
+    <p class="features-list"></p>
+
+    <div class="auto-grid auto-grid-2">
+      <!-- Simluate mouse movement before MaoOS Timeout -->
+      <div>
+        <div class="heading-link-activator">
+          <h4 class="inline-block no-margin-bottom">Simulate Mouse Movement</h4>
+          <a href="#simulate-mouse-movement" class="heading-link">#</a>
+          <h5 class="no-margin-top lighter-weight">
+            Simulate mouse movement to keep the Mac awake and active
+          </h5>
+        </div>
+
+        <img
+          src="./images/preview.jpg"
+          alt="BeeAway Preview"
+          class="preview-image"
+          width="100%"
+          height="auto"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <!-- end of preview -->
+
+      <!-- Simulate App Focus -->
+      <div>
+        <div class="heading-link-activator">
+          <h4 class="inline-block no-margin-bottom">App Focus Simulation</h4>
+          <a href="#app-focus-simulation" class="heading-link">#</a>
+          <h5 class="no-margin-top lighter-weight">
+            For apps selected, it simulates focus by pinging the app icon in the
+            menu bar
+          </h5>
+        </div>
+
+        <img
+          src="./images/preview-prefs.jpg"
+          alt="BeeAway Preview"
+          class="preview-image"
+          width="100%"
+          height="auto"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+
+    <div>
+      <div class="heading-link-activator">
+        <h4 class="inline-block no-margin-bottom">Other Features</h4>
+        <a href="#other-features" class="heading-link">#</a>
+        <h5 class="no-margin-top lighter-weight">
+          Kindly ignore, added to sounds fancy
+        </h5>
+      </div>
+      <ul>
+        <li>Simulate mouse movement to keep the Mac awake and active.</li>
+        <li>
+          For apps selected, it simulates focus by pinging the app icon in the
+          menu bar.
+        </li>
+        <li>Adapts to battery vs. AC power.</li>
+        <li>Supports custom activation durations.</li>
+        <li>Pauses itself when battery is low.</li>
+        <li>Adapts to the timeout of the system.</li>
+        <li>Lightweight and easy to use.</li>
+        <li>Built with SwiftUI, making it a native macOS application.</li>
+        <li>
+          Open-source and available on GitHub for anyone to contribute or use.
+        </li>
+      </ul>
+    </div>
+    <!-- end of features section -->
+
+    <!-- contact section -->
+    <div class="changeable-section">
+      <div class="heading-link-activator">
+        <h2 class="inline-block no-margin-bottom">
+          Find me on these platforms.
+        </h2>
+        <a href="#contact" class="heading-link">#</a>
+      </div>
+      <div class="contact-wrapper">
+        <a
+          href="https://github.com/ragarwalll"
+          target="_blank"
+          class="new-anchor"
+          >GitHub</a
+        >
+        ⊙
+        <a
+          href="https://www.linkedin.com/in/ragarwalll/"
+          target="_blank"
+          class="new-anchor"
+          >LinkedIn</a
+        >
+        ⊙
+        <a
+          href="mailto:contact@therahulagarwal.com"
+          target="_blank"
+          class="new-anchor"
+          >contact@therahulagarwal.com</a
+        >
+        ⊙
+        <a
+          href="mailto:agarwal.rahul324@gmail.com"
+          target="_blank"
+          class="new-anchor"
+          >agarwal.rahul324@gmail.com</a
+        >
+        ⊙
+        <a
+          href="https://bsky.app/profile/therahulagarwal.com"
+          target="_blank"
+          class="new-anchor"
+          >BlueSky</a
+        >
+        ⊙
+        <a
+          href="https://www.instagram.com/rahulllagarwalll/"
+          target="_blank"
+          class="new-anchor"
+          >Instagram</a
+        >
+      </div>
+    </div>
+    <!-- end of contact section -->
+
+    <!-- footer section/copyright section -->
+    <footer class="some-margin-top">
+      <p>
+        Copyright © Rahul Agarwal
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        <i
+          ><br />find the source code
+          <a
+            href="https://github.com/ragarwalll/bee-away"
+            target="_blank"
+            class="new-anchor"
+            >here</a
+          >.</i
+        >
+        <i
+          ><br />find my portfolio
+          <a
+            href="https://therahulagarwal.com/"
+            target="_blank"
+            class="new-anchor"
+            >here</a
+          >.</i
+        >
+      </p>
+    </footer>
+    <!-- end of footer section -->
+
+    <!-- linking script sections -->
+    <script type="text/javascript" src="./script.js" defer></script>
+  </body>
+</html>
