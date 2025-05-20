@@ -1,0 +1,104 @@
+{
+  "$schema": "https://therahulagarwal.com/minimalify/dist/schema/minimalify@latest.json",
+  "src_dir": ".",
+  "out_dir": "dist",
+  "shared_domains": ["https://therahulagarwal.com"],
+  "html": {
+    "minify": true
+  },
+  "css": {
+    "minify": true
+  },
+  "js": {
+    "minify": true
+  },
+  "images": {
+    "optimize": true,
+    "supported_formats": ["jpg", "jpeg", "png", "gif", "webp", "svg"]
+  },
+  "templates": {
+    "dir": "templates",
+    "shared_uri": [
+      "https://therahulagarwal.com/minimalify/dist/@latest/templates"
+    ]
+  },
+  "seo": {
+    "title": "BeeAway",
+    "description": "BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low.",
+    "keywords": [
+      "macOS status bar utility",
+      "keep awake",
+      "idle prevention",
+      "mouse wiggle",
+      "app ping",
+      "battery aware",
+      "power management",
+      "accessibility automation",
+      "notification keep-alive",
+      "custom duration",
+      "homebrew cask",
+      "BeeAway",
+      "menu-bar app",
+      "productivity tool",
+      "SwiftUI",
+      "Swift macOS app"
+    ],
+    "classification": "Utility",
+    "url": "https://therahulagarwal.com/bee-away",
+    "rating": "General",
+    "target": "all",
+    "author": {
+      "first_name": "Rahul",
+      "last_name": "Agarwal",
+      "username": "ragarwalll",
+      "email": "agarwal.rahul324@gmail.com",
+      "image": "https://therahulagarwal.com/bee-away/images/banner.jpg",
+      "image_alt": "Rahul Agarwal's BeeAway",
+      "image_type": "image/jpeg",
+      "twitter": "https://x.com/rahulagarwall",
+      "linkedin": "https://www.linkedin.com/in/ragarwalll/",
+      "github": "https://github.com/ragarwalll",
+      "instagram": "https://www.instagram.com/rahulllagarwalll/"
+    },
+    "open_graph": {
+      "type": "website",
+      "site_name": "Rahul Agarwal's BeeAway"
+    },
+    "twitter": {},
+    "robots": {
+      "index": true,
+      "follow": true
+    }
+  },
+  "favicon": {
+    "base": "favicon.svg",
+    "settings": {
+      "favicon_active": "base",
+      "favicon_inactive": "base",
+      "safari": "base",
+      "mstile": "base",
+      "pwa": "base",
+      "apple": "base"
+    },
+    "theme_color": "#101010",
+    "background_color": "#101010",
+    "svg_current_color": "#B7AB98"
+  },
+  "dev": {
+    "port": 3000
+  },
+  "cache": true,
+  "plugins": [
+    "accessibility",
+    "bundle-analyzer",
+    "custom-domain",
+    "image-optimizer",
+    "markdown",
+    "perf-monitor",
+    "seo",
+    "sitemap",
+    "version-assets",
+    "spa",
+    "favicon"
+  ]
+}
