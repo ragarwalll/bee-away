@@ -1,0 +1,119 @@
+{
+  "name": "BeeAway",
+  "short_name": "Rahul Agarwal",
+  "description": "BeeAway is a lightweight macOS menu-bar utility that keeps your Mac “active” by simulating user input just before the system idle timeout. It can wiggle the mouse or “ping” selected menu-bar app icons (e.g. Teams) so that apps never mark you as “away.” It adapts to battery vs. AC power, supports custom activation durations, and pauses itself when battery is low.",
+  "start_url": "/bee-away",
+  "display": "standalone",
+  "background_color": "#101010",
+  "theme_color": "#101010",
+  "categories": [
+    "macOS status bar utility",
+    "keep awake",
+    "idle prevention",
+    "mouse wiggle",
+    "app ping",
+    "battery aware",
+    "power management",
+    "accessibility automation",
+    "notification keep-alive",
+    "custom duration",
+    "homebrew cask",
+    "BeeAway",
+    "menu-bar app",
+    "productivity tool",
+    "SwiftUI",
+    "Swift macOS app"
+  ],
+  "icons": [
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-57x57.png",
+      "sizes": "57x57",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-60x60.png",
+      "sizes": "60x60",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-70x70.png",
+      "sizes": "70x70",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-76x76.png",
+      "sizes": "76x76",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-114x114.png",
+      "sizes": "114x114",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-228x228.png",
+      "sizes": "228x228",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-310x310.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "7bf92f32-77ae-4e8a-8411-63975a90137f/base-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
