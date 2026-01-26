@@ -49,7 +49,7 @@
         "standard-version": "^9.5.0"
     },
     "dependencies": {
-        "create-dmg": "^7.0.0",
+        "create-dmg": "^8.0.0",
         "glob": "^11.0.0"
     },
     "standard-version": {
